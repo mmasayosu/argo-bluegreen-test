@@ -1,25 +1,25 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: rollout-bluegreen-active 
+  name: rollout-bluegreen-active
 spec:
-  ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
   selector:
-    app: rollout-bluegreen 
-
-apiVersion: v1
+    app: rollout-bluegreen
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
 kind: Service
+apiVersion: v1
 metadata:
   name: rollout-bluegreen-preview
 spec:
-  ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
   selector:
-    app: rollout-bluegreen 
+    app: rollout-bluegreen
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
